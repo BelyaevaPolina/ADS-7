@@ -19,7 +19,9 @@ BST<std::string> makeTree(const char* filename) {
             flagNotAdd = true;
             if ((string[j] >= 'a' && string[j] <= 'z') ||
                 (string[j] >= 'A' && string[j] <= 'Z')) {
-                word += (char)tolower(string[j]);
+             if (string[j] >= 'A' && string[j] <= 'Z')
+              string[j] + 32;
+             word += string[j];
             } else {
                 if (!word.empty()) {
                     Tree.add(word);
