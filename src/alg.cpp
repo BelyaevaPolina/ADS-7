@@ -6,7 +6,7 @@
 #include  "bst.h"
 
 BST<std::string> makeTree(const char* filename) {
- BST<std::string>Tree;
+  BST<std::string>Tree;
   char DifBetweenCh = 'a' - 'A';
   std::string word = "";
   std::ifstream file(filename);
