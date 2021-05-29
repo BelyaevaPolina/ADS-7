@@ -7,35 +7,24 @@
 
 BST<std::string> makeTree(const char* filename) {
  BST<std::string>Tree;
-    bool flagNotAdd = true;
-    std::string word = "", string = "";
-    std::ifstream file(filename);
-    if (!file) {
-        std::cout << "File error!" << std::endl;
-        return Tree;
-    }
-    while (file >> string) {
-        for (int j = 0; j < string.size(); j++) {
-            flagNotAdd = true;
-            if ((string[j] >= 'a' && string[j] <= 'z') ||
-                (string[j] >= 'A' && string[j] <= 'Z')) {
-             if (string[j] >= 'A' && string[j] <= 'Z')
-              string[j] + 32;
-             word += string[j];
-            } else {
-                if (!word.empty()) {
-                    Tree.add(word);
-                    word.clear();
-                    flagNotAdd = false;
-                    continue;
-                }
-            }
-        }
-        if (flagNotAdd && !word.empty()) {
-            Tree.add(word);
-            word.clear();
-        }
-    }
-    file.close();
+  char DifBetweenCh = 'a' - 'A';
+  std::string word = "";
+  std::ifstream file(filename);
+  if (!file) {
+    std::cout << "File not found" << std::endl;
     return Tree;
+  }
+  while (!file.eof()) {
+    char ch = file.get();
+    if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+      if (ch >= 'A' && ch <= 'Z')
+        ch += DifBetweenCh;
+      word += ch;
+    } else if (word != "") {
+      Tree.add(word);
+      word = "";
+    }
+  }
+  file.close();
+  return Tree;
 }
